@@ -37,18 +37,18 @@ export default function PatientForm() {
                         type="text"
                         placeholder="Dog Name"
                         {...register('name', {
-                            required: 'Please complete this field',
+                            required: 'Please complete the dog name',
                             maxLength: {
                                 value: 20,
                                 message: 'Max 20 characters'
                             }
                         })}
                     />
-                    {errors.name && (
+                    {errors.name ? (
                         <Error>
                             {errors.name?.message?.toString()}
                         </Error>
-                    )}
+                    ) : ''}
 
                     {errors.maxLength && (
                         <Error>
@@ -62,11 +62,24 @@ export default function PatientForm() {
                         Owner
                     </label>
                     <input
-                        id="caretaker"
+                        id="owner"
                         className="w-full p-3  border border-gray-100"
                         type="text"
                         placeholder="Owner Name"
+                        {...register('owner', {
+                            required: 'Please complete the owner name',
+                            maxLength: {
+                                value: 20,
+                                message: 'Max 20 characters'
+                            }
+                        })}
                     />
+
+                    {errors.owner && (
+                        <Error>
+                            {errors.owner?.message?.toString()}
+                        </Error>
+                    )}
                 </div>
 
                 <div className="mb-5">
@@ -78,7 +91,20 @@ export default function PatientForm() {
                         className="w-full p-3  border border-gray-100"
                         type="email"
                         placeholder="Email"
+                        {...register("email", {
+                            required: "Please complete the email",
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: 'Invalid email'
+                            }
+                        })}
                     />
+                    {errors.email ? (
+                        <Error>
+                            {errors.email?.message?.toString()}
+                        </Error>
+                    ) : ''}
+
                 </div>
 
                 <div className="mb-5">
@@ -89,7 +115,16 @@ export default function PatientForm() {
                         id="date"
                         className="w-full p-3  border border-gray-100"
                         type="date"
+                        {...register('date', {
+                            required: 'Please complete the date',
+                        })}
                     />
+
+                    {errors.date && (
+                        <Error>
+                            {errors.date?.message?.toString()}
+                        </Error>
+                    )}
                 </div>
 
                 <div className="mb-5">
@@ -100,7 +135,15 @@ export default function PatientForm() {
                         id="symptoms"
                         className="w-full p-3  border border-gray-100"
                         placeholder="Dog Symptoms"
+                        {...register('symptoms', {
+                            required: 'Please complete the symptoms',
+                        })}
                     ></textarea>
+                    {errors.symptoms && (
+                        <Error>
+                            {errors.symptoms?.message?.toString()}
+                        </Error>
+                    )}
                 </div>
 
                 <input
